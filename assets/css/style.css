@@ -122,6 +122,21 @@ textarea:focus {
   border-radius: 1rem;
   background: -webkit-gradient(linear, left top, left bottom, from(#ffed26), to(#ffb400));
   background: linear-gradient(180deg, #ffed26 0%, #ffb400 100%);
+  transition: all 0.4s;
+  -webkit-box-shadow: 1px 2px 20px 0px rgba(255, 153, 0, 0.4);
+  box-shadow: 1px 2px 20px 0px rgba(255, 153, 0, 0.4);
+}
+
+.button:disabled {
+  background: gray;
+  border: 1px solid gray;
+  box-shadow: none;
+}
+
+.button--active {
+  border: 1px solid #ffc600;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffed26), to(#ffb400));
+  background: linear-gradient(180deg, #ffed26 0%, #ffb400 100%);
   -webkit-box-shadow: 1px 2px 20px 0px rgba(255, 153, 0, 0.4);
   box-shadow: 1px 2px 20px 0px rgba(255, 153, 0, 0.4);
 }

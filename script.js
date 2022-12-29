@@ -18132,10 +18132,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var clearState = function clearState(state) {
+  var select = document.querySelector('#view_type');
   Object.keys(state).forEach(function (key) {
     delete state[key];
     state.form = 0;
-    state.type = 'tree';
+    state.type = select.value = 'tree';
   });
 };
 

@@ -17965,8 +17965,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/changeModalState */ "./src/js/modules/changeModalState.js");
 /* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/timer */ "./src/js/modules/timer.js");
 /* harmony import */ var _modules_images__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/images */ "./src/js/modules/images.js");
-/* harmony import */ var _modules_typeWindowsTabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/typeWindowsTabs */ "./src/js/modules/typeWindowsTabs.js");
-
 
 
 
@@ -17982,10 +17980,9 @@ window.addEventListener('DOMContentLoaded', function () {
   var deadline = '2023-03-17';
   Object(_modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__["default"])(modalState);
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])(modalState);
-  Object(_modules_typeWindowsTabs__WEBPACK_IMPORTED_MODULE_7__["default"])('.glazing_slider', '.glazing_block', modalState);
-  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.glazing_slider', '.glazing_block', '.glazing_content', 'active');
-  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after_click');
-  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img  > img', 'do_image_more', 'inline-block');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.glazing_slider', '.glazing_block', '.glazing_content', modalState, 'active');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.decoration_slider', '.no_click', '.decoration_content > div > div', modalState, 'after_click');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img  > img', modalState, 'do_image_more', 'inline-block');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(modalState);
   Object(_modules_timer__WEBPACK_IMPORTED_MODULE_5__["default"])('.container1', deadline);
   Object(_modules_images__WEBPACK_IMPORTED_MODULE_6__["default"])();
@@ -18345,8 +18342,10 @@ var modals = function modals(state) {
         if (e.target.classList.contains('glazing_price_btn')) {
           if (e.target.parentNode.previousElementSibling.classList.contains("glazing_warm")) {
             warmCheck.checked = true;
+            state.profile = "Теплое";
           } else {
             coldCheck.checked = true;
+            state.profile = "Холодное";
           }
         }
 
@@ -18369,7 +18368,7 @@ var modals = function modals(state) {
             btnCalc.classList.add('button--active');
           }
 
-          if (input.getAttribute('type') === 'checkbox') {
+          if (!coldCheck.checked || !warmCheck.checked) {
             btnCalcProfile.removeAttribute('disabled');
             btnCalcProfile.classList.add('button--active');
           } else {
@@ -18451,11 +18450,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var tabs = function tabs(parentSelector, tabSelector, contentSelector, activeClass) {
-  var display = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'block';
+var tabs = function tabs(parentSelector, tabSelector, contentSelector, state, activeClass) {
+  var display = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'block';
   var parent = document.querySelector(parentSelector),
       tabs = document.querySelectorAll(tabSelector),
-      content = document.querySelectorAll(contentSelector);
+      content = document.querySelectorAll(contentSelector),
+      windowType = document.querySelector('#view_type');
 
   function hideTabsContent() {
     content.forEach(function (item) {
@@ -18482,6 +18482,15 @@ var tabs = function tabs(parentSelector, tabSelector, contentSelector, activeCla
         if (target === item || target.parentNode === item) {
           hideTabsContent();
           showTabsContent(i);
+        }
+      });
+    }
+
+    if (target.classList.contains('glazing_block') || target.parentNode.classList.contains('glazing_block')) {
+      tabs.forEach(function (item, i) {
+        if (target === item || target.parentNode === item) {
+          windowType.selectedIndex = i;
+          state.type = windowType.value;
         }
       });
     }
@@ -18555,44 +18564,6 @@ var timer = function timer(id, deadline) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (timer);
-
-/***/ }),
-
-/***/ "./src/js/modules/typeWindowsTabs.js":
-/*!*******************************************!*\
-  !*** ./src/js/modules/typeWindowsTabs.js ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-var typeWindowsTabs = function typeWindowsTabs(parentSelector, tabSelector, state) {
-  var parent = document.querySelector(parentSelector),
-      tabs = document.querySelectorAll(tabSelector),
-      windowType = document.querySelector('#view_type');
-  parent.addEventListener('click', function (e) {
-    var target = e.target;
-
-    if (target && (target.classList.contains(tabSelector.replace(/\./, '')) || target.parentNode.classList.contains(tabSelector.replace(/\./, '')))) {
-      tabs.forEach(function (item, i) {
-        if (target === item || target.parentNode === item) {
-          windowType.selectedIndex = i;
-          state.type = windowType.value;
-        }
-      });
-    }
-  });
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (typeWindowsTabs);
 
 /***/ }),
 

@@ -18,6 +18,20 @@ body {
   color: red;
 }
 
+.faded {
+  animation-name: faded;
+  animation-duration: 1.5s;
+}
+
+@keyframes faded {
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -120,6 +134,21 @@ textarea:focus {
   font-style: normal;
   border: 1px solid #ffc600;
   border-radius: 1rem;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffed26), to(#ffb400));
+  background: linear-gradient(180deg, #ffed26 0%, #ffb400 100%);
+  transition: all 0.4s;
+  -webkit-box-shadow: 1px 2px 20px 0px rgba(255, 153, 0, 0.4);
+  box-shadow: 1px 2px 20px 0px rgba(255, 153, 0, 0.4);
+}
+
+.button:disabled {
+  background: gray;
+  border: 1px solid gray;
+  box-shadow: none;
+}
+
+.button--active {
+  border: 1px solid #ffc600;
   background: -webkit-gradient(linear, left top, left bottom, from(#ffed26), to(#ffb400));
   background: linear-gradient(180deg, #ffed26 0%, #ffb400 100%);
   -webkit-box-shadow: 1px 2px 20px 0px rgba(255, 153, 0, 0.4);
@@ -1311,6 +1340,15 @@ textarea:focus {
     display: block;
     margin-right: 0;
     margin-bottom: 2rem;
+  }
+
+  .timer1 {
+    width: auto;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .timer1 span {
+    margin-right: 1px;
   }
 }
 

@@ -1,6 +1,5 @@
 import clearInputs from "./clearInputs";
 import clearState from "./clearState";
-
 const modals = (state) => {
     function bindModal(triggerSelector, modalSelector, closeSelector, closeClickOverlay = true) {
         const trigger = document.querySelectorAll(triggerSelector),
@@ -38,13 +37,12 @@ const modals = (state) => {
             });
         });
 
-
         inputs.forEach(input => {
             btnCalc.setAttribute('disabled', 'true');
             btnCalcProfile.setAttribute('disabled', 'true');
 
             input.addEventListener('input', () => {
-                if(!state.width || !state.height || !state.profile) {
+                if(!state.width || !state.height) {
                     btnCalc.setAttribute('disabled', 'true');
                     btnCalc.classList.remove('button--active');
                 } else {
@@ -96,17 +94,14 @@ const modals = (state) => {
 
     function calcScroll() {
         let div = document.createElement('div');
-
         div.style.width = '20px';
         div.style.height = '20px';
         div.style.position = 'absolute';
         div.style.overflowY = 'scroll';
         div.style.visibility = 'hidden';
-
         document.body.appendChild(div);
         let scrollWidth = div.offsetWidth - div.clientWidth;
         div.remove;
-
         return scrollWidth;
     }
 
@@ -117,5 +112,4 @@ const modals = (state) => {
     bindModal('.popup_calc_profile_button', '.popup_calc_end', '.popup_calc_end_close', false);
     showModalByTime('.popup_engineer', 60000);
 };
-
 export default modals;

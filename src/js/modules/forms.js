@@ -48,11 +48,11 @@ const forms = (state) => {
             })
             .catch(() => statusMessage.textContent = message.failure)
             .finally(() => {
-                clearInputs('input');
-                clearState(state);
-                btnCalc.disabled = 'true';
-                btnCalcProfile.disabled = 'true';
                 setTimeout(() => {
+                    clearInputs('input');
+                    clearState(state);
+                    btnCalc.disabled = 'true';
+                    btnCalcProfile.disabled = 'true';
                     statusMessage.remove();
                     document.querySelector('.popup_calc_end').style.display = 'none';
                     document.body.style.overflow = '';

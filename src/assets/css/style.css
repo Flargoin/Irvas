@@ -1341,6 +1341,15 @@ textarea:focus {
     margin-right: 0;
     margin-bottom: 2rem;
   }
+
+  .timer1 {
+    width: auto;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .timer1 span {
+    margin-right: 1px;
+  }
 }
 
 @media (max-width: 767px) {

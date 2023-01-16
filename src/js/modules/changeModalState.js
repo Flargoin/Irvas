@@ -38,12 +38,6 @@ const changeModalState = (state) => {
                 console.log(state);
             });
         });
-
-/*         if(!state.form) {
-            windowForm.forEach(item => {
-                console.log(item);
-            });
-        } */
     }
 
     bindActionToElems('click', windowForm, 'form');
